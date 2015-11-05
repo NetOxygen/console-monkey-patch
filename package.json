@@ -1,0 +1,21 @@
+{
+  "name": "console-monkey-patch",
+  "version": "1.0.0",
+  "description": "Node.js module monkeypatching the console object",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NetOxygen/console-monkey-patch.git"
+  },
+  "keywords": [
+    "console"
+  ],
+  "author": "Net Oxygen Sàrl <info@netoxygen.ch> (https://netoxygen.ch)",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "~2.3.3"
+  }
+}
