@@ -9,16 +9,16 @@ This module allow to override `console` methods in a simple way.
 ## Simple example
 The most simple example is to create a new `console.Console` object (see
 https://nodejs.org/api/console.html#console_class_console):
-```lang=js
+```javascript
 var fs = require("fs");
-var newstdout = fs.createWriteStream('/some/path',       {flags: 'a'});
-var newstderr = fs.createWriteStream('/some/other/path', {flags: 'a'});
-var newcons   = new console.Console(newstdout, newstdout);
+var newstdout = fs.createWriteStream('/tmp/stdout.log', {flags: 'a'});
+var newstderr = fs.createWriteStream('/tmp/stderr.log', {flags: 'a'});
+var newcons   = new console.Console(newstdout, newstderr);
 
 require("console-monkey-patch")(newcons);
 
-console.log('this should go to /some/path');
-console.error('this should go to /some/other/path');
+console.log('this should go to /tmp/stdout.log');
+console.error('this should go to /tmp/stderr.log');
 ```
 
 ## Limitations
