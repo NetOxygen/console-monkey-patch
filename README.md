@@ -1,2 +1,31 @@
 # console-monkey-patch
- Node.js module monkeypatching the console object
+Hack the console object methods (like log, error, info etc.).
+
+## Abstract
+In Node.js it is sometime desirable to redirect `console.log` & Co. calls to a
+given stream but not possible to actually replace `stdout` and/or `stderr`.
+This module allow to override `console` methods in a simple way.
+
+## Simple example
+The most simple example is to create a new `console.Console` object (see
+https://nodejs.org/api/console.html#console_class_console):
+```lang=js
+var fs = require("fs");
+var newstdout = fs.createWriteStream('/some/path',       {flags: 'a'});
+var newstderr = fs.createWriteStream('/some/other/path', {flags: 'a'});
+var newcons   = new console.Console(newstdout, newstdout);
+
+require("console-monkey-patch")(newcons);
+
+console.log('this should go to /some/path');
+console.error('this should go to /some/other/path');
+```
+
+## Limitations
+The module only override the `console` methods documented at
+https://nodejs.org/api/console.html and does not replace `process.stdout` and
+`process.stderr`. As a result, code (including modules) using directly theses
+streams won't be "affected".
+
+# LICENSE
+MIT, see MIT-LICENSE.
