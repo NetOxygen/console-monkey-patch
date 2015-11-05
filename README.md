@@ -6,6 +6,9 @@ In Node.js it is sometime desirable to redirect `console.log` & Co. calls to a
 given stream but not possible to actually replace `stdout` and/or `stderr`.
 This module allow to override `console` methods in a simple way.
 
+## Installation
+    npm install console-monkey-patch
+
 ## Simple example
 The most simple example is to create a new `console.Console` object (see
 https://nodejs.org/api/console.html#console_class_console):
