@@ -8,30 +8,26 @@ var console = require("console");
 
 var console_monkey_patch = require('../');
 
-
-var targets = [
+// the methods we can patch
+// XXX: copied from the plugin, since it doesn't expose them.
+var methods = [
     'log', 'info', 'error', 'warn', 'dir', 'time', 'timeEnd', 'trace', 'assert'
 ];
 
 describe("console-monkey-patch", function () {
-    it('should noop when null is given', function () {
-        assert.doesNotThrow(function () {
-            assert.strictEqual(null, console_monkey_patch(null));
+    [null, undefined].forEach(function (noop) {
+        it('should noop when ' + String(noop) + ' is given', function () {
+            assert.doesNotThrow(function () {
+                assert.strictEqual(noop, console_monkey_patch(noop));
+            });
         });
     });
 
-    it('should noop when undefined is given', function () {
-        assert.doesNotThrow(function () {
-            assert.strictEqual(undefined, console_monkey_patch(undefined));
-        });
-    });
-
-    targets.forEach(function (t) {
+    methods.forEach(function (t) {
         it('should patch console.' + t, function () {
-            var newcons;
             // effectively create a new console with the same behaviour as the
             // default.
-            newcons = new console.Console(process.stdout, process.stderr);
+            var newcons = new console.Console(process.stdout, process.stderr);
             assert.strictEqual(newcons, console_monkey_patch(newcons));
             assert.strictEqual(console[t], newcons[t]);
         });
@@ -42,16 +38,15 @@ describe("console-monkey-patch", function () {
         var newcons = {
             warn: function () { return 42; }
         };
-        // build the set of function that should not change.
+        // build the set of original console methods
         var oldcons = {};
-        targets.forEach(function (t) {
+        methods.forEach(function (t) {
             oldcons[t] = console[t];
         });
         assert.strictEqual(newcons, console_monkey_patch(newcons));
-        assert.strictEqual(newcons.warn, console.warn);
         for (var f in oldcons) {
-            if (f !== 'warn')
-                assert.strictEqual(oldcons[f], console[f]);
+            var cons = (f in newcons ? newcons : oldcons);
+            assert.strictEqual(cons[f], console[f]);
         }
     });
 
