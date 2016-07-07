@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/NetOxygen/console-monkey-patch.svg?branch=master)](https://travis-ci.org/NetOxygen/console-monkey-patch)
+
 # console-monkey-patch
 Hack the console object methods (like log, error, info etc.).
 
