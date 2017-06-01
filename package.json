@@ -16,6 +16,6 @@
   "author": "Net Oxygen Sàrl <info@netoxygen.ch> (https://netoxygen.ch)",
   "license": "MIT",
   "devDependencies": {
-    "mocha": "~2.3.3"
+    "mocha": "~3.4.2"
   }
 }
