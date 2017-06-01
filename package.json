@@ -1,6 +1,6 @@
 {
   "name": "console-monkey-patch",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Node.js module monkeypatching the console object",
   "main": "index.js",
   "scripts": {
